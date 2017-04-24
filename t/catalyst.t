@@ -5,17 +5,17 @@ BEGIN {
 
 use Test::Most;
 use Catalyst::Test 'MyApp';
-use Mojo::DOM58;
+use Template::Lace::DOM;
 
 {
   ok my $res = request '/list';
-  ok my $dom = Mojo::DOM58->new($res->content);
+  ok my $dom = Template::Lace::DOM->new($res->content);
   warn $res->content;
 }
 
 {
   ok my $res = request '/user';
-  ok my $dom = Mojo::DOM58->new($res->content);
+  ok my $dom = Template::Lace::DOM->new($res->content);
   warn $res->content;
 }
 done_testing;
