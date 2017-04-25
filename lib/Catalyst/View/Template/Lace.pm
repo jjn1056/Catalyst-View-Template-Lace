@@ -134,7 +134,7 @@ write smarter views with display logic properly encapsulated near the template
 code it will actually be used.  This reduces complexity in your controllers and
 makes it easier to solve complex layout logic.
 
-After reviewing these documentation you can advance to L<Catalyst::View::Template::Lace>
+After reviewing these documentation you can advance to L<Catalyst::View::Template::Lace::Tutorial>
 and you might find the test cases in the C</t> directory of this distribution
 handy as well.
 
