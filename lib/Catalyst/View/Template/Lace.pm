@@ -138,6 +138,10 @@ After reviewing these documentation you can advance to L<Catalyst::View::Templat
 and you might find the test cases in the C</t> directory of this distribution
 handy as well.
 
+B<NOTE> I consider current documentation to be the 'thin red line' requirement
+for CPAN publication but there's tons more to be done.  Critique and contributions
+very welcomed!.
+
 =head1 CONFIGURATION
 
 This component defines the following configuration options:
