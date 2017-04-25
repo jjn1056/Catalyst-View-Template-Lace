@@ -9,11 +9,20 @@ sub action_for { shift->ctx->controller->action_for(@_) }
 
 sub uri {
   my ($self, $action_proto, @args) = @_;
+
+  # If its already an action object just use it.
   return $self->ctx->uri_for($action_proto, @args)
-    if Scalar::Util::blessed($action_proto);
+    if Scalar::Util::blessed($action_proto); 
 
   my $controller = $self->ctx->controller;
   my $action;
+
+  # Otherwise its a string which is a full or relative path
+  # to the private name of an action.  Resolve it.
+  # Starts with '/' means its a full absolute private name
+  # Otherwise its a realtive name to the current controller
+  # namespace.
+
   if($action_proto =~/\//) {
     my $path = $action_proto=~m/^\// ? $action_proto : $controller->action_for($action_proto)->private_path;
     die "$action_proto is not an action for controller ${\$controller->component_name}" unless $path;
@@ -34,11 +43,51 @@ Catalyst::View::Template::Lace::Role::URI - Shortcut to create a URI on the curr
 
 =head1 SYNOPSIS
 
-    TBD
+    package  MyApp::View::User;
+
+    use Moo;
+    use Template::Lace::Utils 'mk_component';
+    extends 'Catalyst::View::Template::Lace';
+    with 'Template::Lace::ModelRole',
+      'Catalyst::View::Template::Lace::Role::URI';
+
+    sub template {q[
+      <html>
+        <head>
+          <title>Link Example</title>
+        </head>
+        <body>
+         <a>Link</a>
+        </body>
+      </html>
+    ]}
+
+    sub process_dom {
+      my ($self, $dom) = @_;
+      $dom->at('a')
+       ->href($self->uri('../display));
+    }
 
 =head1 DESCRIPTION
 
-    TBD
+A role that gives your model object a C<uri> method.  This method works
+similarly to "$c->uri_for" except that it only takes an action object or
+a string that is an absolute or relative (to the current controller) private
+name.
+
+=head1 METHOD
+
+This role defines the following methods
+
+=head2 uri
+
+    $self->uri($action);
+    $self->uri('/user/display');
+    $self->uri('display');
+    $self->uri('../list');
+
+First argument is an action object or a string.  If a string it must be either
+an absolute private name to an action or a relative one
 
 =head1 SEE ALSO
  

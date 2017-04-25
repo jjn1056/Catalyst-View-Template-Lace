@@ -24,7 +24,13 @@ Catalyst::View::Template::Lace::Factory - Adapt Template::Lace for Catalyst
 
 =head1 DESCRIPTION
 
-    TBD
+This is a subclass of L<Template::Lace::Factory> which does C<ACCEPT_CONTEXT>
+so that we can adapt the creation of templates to L<Catalyst>.  Any arguments
+passed to the C<view> method are sent to C<create>.  We also capture the context
+object and send it as C<ctx> as an argument, that way your templates get access
+to context via the C<ctx> attributes (see L<Catalyst::View::Template::Lace>.)
+
+Otherwise there's no real user useful bits here beyond education.
 
 =head1 AUTHOR
  

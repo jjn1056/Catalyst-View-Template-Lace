@@ -1,8 +1,7 @@
 =head1 Overview
 
-L<Template::Lace> and the L<Catalyst> wrapper (L<Catalyst::View::Template::Lace>) are still under significant development but are currently in usable form for people willing to play with post Alpha / early Beta code. If interested in seeing more you can review the Github repo (L<https://github.com/jjn1056/Template-Lace>).  This post presumes basic knowledge of Perl (L<https://www.perl.org>), Catalyst (L<https://metacpan.org/release/Catalyst-Runtime>) and support technologies like Moo/se. (L<https://metacpan.org/pod/Moo> / L<https://metacpan.org/pod/Moose>)
-
-Since L<Template::Lace> is designed to be a toolkit one integrates into an existing web framework, all examples and discussion will be using the L<Catalyst> adaptor L<Catalyst::View::Template::Lace> rather than on L<Template::Lace> standalone.
+You should review the documentation at L<Catalyst::View::Template::Lace> and it would be helpful to have
+reviewed the documentation at L<Template::Lace> as well, much of which will overlap in this tutorial.
 
 Given a L<Catalyst> project called L<MyApp> (located $HOME/lib/MyApp.pm) setup in the normal way lets see an example template ($HOME/lib/MyApp/View/user.html)
 
@@ -129,7 +128,7 @@ This is the bare basics of Template::Lace but there's a ton of other features an
 
 The main view class for this template is just handling the bit where we layout the Todo items.  Everything else on this page is delegated to a component.  Here's the class:
 
-package  MyApp::View::List;
+    package  MyApp::View::List;
 
     use Moo;
     extends 'Catalyst::View::Template::Lace';

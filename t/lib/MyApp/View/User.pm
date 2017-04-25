@@ -1,10 +1,12 @@
 package  MyApp::View::User;
 
 use Moo;
+use Template::Lace::Utils 'mk_component';
 extends 'Catalyst::View::Template::Lace';
 with 'Template::Lace::ModelRole',
   'Catalyst::View::Template::Lace::Role::ArgsFromStash',
-  'Template::Lace::Model::AutoTemplate';
+  'Template::Lace::Model::AutoTemplate',
+  'Catalyst::View::Template::Lace::Role::URI';
 
 has [qw/age name motto/] => (is=>'ro', required=>1);
 
@@ -15,7 +17,7 @@ sub template {q[
     </head>
     <body>
       <dl id='user'>
-        <dt><tag-anchor href="/profile/john">Name</tag-anchor></dt>
+        <dt><a>Name</a></dt>
         <dd id='name'>NAME</dd>
         <dt>Age</dt>
         <dd id='age'>AGE</dd>
@@ -32,32 +34,17 @@ sub process_dom {
    age=>$self->age,
    name=>$self->name,
    motto=>$self->motto});
-}
 
-{
-  package Tag::Anchor;
-  use Template::Lace::DOM;
-
-  sub create {
-    my ($self, %attrs) = @_;
-    # %attrs has ctx, model, content as automatic
-    # as well as anything you setup as atttributes (like
-    # in this case "href".  It wil be processed to resolve
-    # as well.
-    return bless \%attrs, ref($self);
-  }
-
-  sub get_processed_dom {
-    my ($self) = @_;
-    return Template::Lace::DOM
-      ->new("<a href='${\$self->{href}}'>${\$self->{content}}</a>");
-  }
+  $dom->at('a')
+    ->href($self->uri('display'));
 }
 
 __PACKAGE__->config(
   component_handlers => {
     tag => {
-      anchor => bless {}, 'Tag::Anchor',
+      anchor => mk_component {
+        return "<a href='$_{href}'>$_{content}</a>"
+      },
     }
   }
 );

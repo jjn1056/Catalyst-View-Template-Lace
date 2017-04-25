@@ -24,7 +24,10 @@ Catalyst::View::Template::Lace::Role::PerContext - One view per request/context
 
 =head1 DESCRIPTION
 
-    TBD
+This is a subclass of L<Catalyst::View::Template::Lace::Factory> that does the
+'PerContext' pattern; that is it creates only one view per request, rather than
+a new one each time the C<view> method is called.  You can set this via the C<adaptor>
+configuration option (see L<Catalyst::View::Template::Lace>).
 
 =head1 SEE ALSO
  
