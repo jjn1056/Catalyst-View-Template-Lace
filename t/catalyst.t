@@ -38,6 +38,8 @@ use Template::Lace::DOM;
   is $dom->at('h1')->content, 'Intro';
   is $dom->at('title')->content, 'User Info';
   is $dom->find('meta')->[0]->attr('charset'), 'utf-8';
+
+  warn $res->content;
 }
 
 done_testing;
