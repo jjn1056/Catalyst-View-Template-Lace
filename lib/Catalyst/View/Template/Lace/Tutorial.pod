@@ -435,7 +435,7 @@ Whereas View:
 
 Would be:
 
-    <view-user::profile>
+    <view-user-profile>
 
 You can use snake case in your view component declaration to indicate camel casing in the package name:
 

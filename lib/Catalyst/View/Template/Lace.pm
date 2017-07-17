@@ -1,11 +1,11 @@
 package Catalyst::View::Template::Lace;
 
-our $VERSION = '0.005';
+our $VERSION = '0.006';
 
-use Moo;
 use Module::Runtime;
 use Catalyst::View::Template::Lace::Renderer;
 use Template::Lace::Utils;
+use Moo;
 
 extends 'Catalyst::View';
 
